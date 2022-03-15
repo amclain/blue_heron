@@ -211,7 +211,7 @@ defmodule BlueHeron.HCI.Transport do
     case module.send_command(pid, bin) do
       true ->
         Logger.hci_packet(:HCI_COMMAND_DATA_PACKET, :out, bin)
-        {:keep_state, add_call(data, {from, opcode})}
+        {:keep_state, add_call(data, {from, opcode}), {:reply, from, :ok}}
 
       false ->
         goto_unopened(data)
